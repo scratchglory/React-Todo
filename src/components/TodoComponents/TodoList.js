@@ -11,7 +11,7 @@ const TodoList = props => {
     <div className="todo-list">
       {props.todoList.map(item => (
         <Todo
-          key={item.id}
+          id={item.id}
           task={item.task}
           completed={item.completed}
           toggleTask={props.toggleTask}

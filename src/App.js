@@ -24,6 +24,7 @@ class App extends React.Component {
     this.state = { todoList };
   }
 
+  // Defining a new class method, not a Const
   addTodo = (e, task) => {
     console.log(e.preventDefault());
     // upon submission
@@ -40,18 +41,33 @@ class App extends React.Component {
   };
 
   clearCompleted = event => {
-    console.log(event);
     this.setState({
       todoList: this.state.todoList.filter(task => task.completed === false)
     });
   };
 
   toggleTask = taskID => {
-    console.log(taskID);
-      this.setState({
-          todoList: this.state.todoList.map(t => console.log(t))
+    // no mutating the current state
+    // for every array && obj - create a new one (..., or array methods)
+    const newTodoTask = this.state.todoList.map(item => {
+      // find the item we click (id)
+      // toggle item's completed
+      console.log(taskID);
+      if (item.id === taskID) {
+        return {
+          ...item,
+          completed: !item.completed
+        };
+      } else {
+        return item;
       }
-      );
+    });
+
+    // Update sate with the new array
+    this.setState({
+      todoList: newTodoTask
+    });
+  };
   render() {
     return (
       <div>
